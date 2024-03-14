@@ -1,0 +1,7 @@
+.nav-pills li a:hover{
+    background-color: blue;
+}
+
+.p-3{
+    display: flex;
+}

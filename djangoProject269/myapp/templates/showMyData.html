@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    <title>ข้อมูล</title>
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-6">
+        <p><h5><b style="color: #000000; font-family: 'Inter'">ชื่อ-สกุล :</b> {{ name }}</h5></p>
+        <p><h5><b style="color: #000000; font-family: 'Inter'">รหัสนักศึกษา :</b> {{ stdId }}</h5></p>
+        <p><h5><b style="color: #000000; font-family: 'Inter'">ที่อยู่ :</b> {{ address }}</h5></p>
+        <p><h5><b style="color: #000000; font-family: 'Inter'">ภูมิลำเนา :</b> {{ domicile }}</h5></p>
+        <p><h5><b style="color: #000000; font-family: 'Inter'">เพศ :</b> {{ gender }}</h5></p>
+
+    </div>
+    <div class="col-sm-6">
+        <p><h5><b style="color: #000000; font-family: 'Inter'">น้ำหนัก :</b> {{ weight }}</h5></p>
+        <p><h5><b style="color: #000000; font-family: 'Inter'">ส่วนสูง :</b> {{ height }}</h5></p>
+        <p><h5><b style="color: #000000; font-family: 'Inter'">สีที่ชอบ :</b> {{ color }}</h5></p>
+        <p><h5><b style="color: #000000; font-family: 'Inter'">อาหารที่ชอบ :</b> {{ food }}</h5></p>
+        <p><h5><b style="color: #000000; font-family: 'Inter'">อาชีพ :</b> {{ job }}</h5></p>
+    </div>
+    <br><br>
+</div>
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+    
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 20px;
+    }
+    
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+
+    img {
+        max-width: 100px; 
+        height: auto; 
+    }
+</style>
+<body>
+    
+    <table>
+        <tr>
+            <th>สินค้า</th>
+            <th>ราคา</th>
+            <th>รูปภาพ</th>
+        </tr>
+        {% for myproduct, myprice, mypicture in products %}
+            <tr>
+                <td>{{ myproduct }}</td>
+                <td>{{ myprice }}</td>
+                <td><img src="{% static 'images/' %}{{ mypicture }}" alt="{{ myproduct }}"></td>
+            </tr>
+        {% endfor %}
+    </table>
+    
+{% endblock %}

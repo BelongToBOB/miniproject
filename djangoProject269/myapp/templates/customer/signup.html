@@ -1,0 +1,28 @@
+{% extends "customer/base3.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    <title>ลงทะเบียน</title>
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    {% if request.method == 'POST' and form.is_valid %}
+    <div class="alert alert-success" role="alert">
+        ลงทะเบียนเสร็จสิ้น
+    </div>      
+    {% endif %}
+    <h2 align="center">ฟอร์มลงทะเบียน</h2>
+    
+    <form method="post">
+        <p>{{ form | crispy }}</p>
+        {% csrf_token %}
+        <input type="submit" class="btn btn-primary" value="Register">
+    </form>
+</div>
+
+    
+  
+{% endblock %}

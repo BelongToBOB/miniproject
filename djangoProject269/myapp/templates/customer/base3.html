@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+{% load static %}
+{% load humanize %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+    <link href='https://fonts.googleapis.com/css?family=Alfa Slab One' rel='stylesheet'>
+    
+    {% block title %}
+    {% endblock %}
+</head>
+<body>
+    <div class="row custom-row">
+        <div class="col col-12 bg-dark text-white">
+            {% include 'customer/header.html' %}
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <div class="bg-dark col-auto col-md-4 col-lg-2 min-vh-100 d-flex flex-column justify-content-between">
+                <div class="bg-light p-2 rounded">  
+                    <form class="d-flex" action="{% url 'search' %}" method="GET">
+                        <input class="form-control me-2" type="text" name="title" placeholder="Search" aria-label="Search">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </div>
+                    </form> 
+                    <a class="d-flex text-decoration-none mt-3 align-item-center text-white">
+                        <span class="fs-4 d-none d-sm-inline" style="color: black;"><i class="fa-solid fa-bars" style="color: #000000;"></i> Menu</span>
+                    </a>
+                    <ul class="nav nav-pills flex-column mt-4">
+                        <li class="nav-item py-2 py-sm-0">
+                            <a class="nav-link" href="/">
+                                <i class="fs-5 fa fa-house" style="color: #000000;"></i>
+                                <span class="fs-4 ms-3 d-none d-sm-inline" style="color: black;">หน้าแรก</span>
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fs-5 fa fa-mobile" style="color: #000000;"></i>
+                                <span class="fs-4 ms-3 d-none d-sm-inline" style="color: black;">choosemobile</span>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="{% url 'choosemobile' %}">สินค้าทั้งหมด</a></li>
+                                {% for category in links %}
+                                <li><a class="dropdown-item" href="{{category.get_url}}">{{category.name}}</a></li>
+                                {% endfor %}
+                            </ul>
+                          </li>
+                        <li class="nav-item py-2 py-sm-0">
+                            <a href="{% url 'cartdetail' %}" class="nav-link text-white" >
+                                <i class="fs-5 fa fa-cart-shopping" style="color: #000000;">
+                                    <span class="fs-5 ms-3 d-none d-sm-inline" style="color: black;">
+                                    {% if item_count > 0 %}
+                                        {{item_count}}
+                                    {% else %}
+                                        0
+                                    {% endif %}
+                                    </span>
+                                </i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item fs-4 ms-5 btn btn-secondary">
+                        <a class="nav-link active" aria-current="page" href="/admin/"><i class="fa-solid fa-user-tie"></i> Admin</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- CONTENT -->
+            <div class="p-3 col col-9 ">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>

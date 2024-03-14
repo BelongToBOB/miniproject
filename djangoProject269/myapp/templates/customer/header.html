@@ -1,0 +1,43 @@
+{% load static %}
+<style>
+    h1{
+        font-family: 'Alfa Slab One';font-size: 30px;
+    }
+    
+</style>
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <div>
+        <h1>
+            <a href="/"><img src="{% static 'images/logo3.png' %}" width="92.5px" height="65.9px"></a>
+            RMUTI Mobile Store
+        </h1>
+        </div>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            {% if request.user.is_authenticated and request.user.first_name %}
+            <li class="nav-item dropdown fs-4 ms-5 btn btn-secondary">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa-solid fa-user"></i> Welcome, {{request.user.first_name}}
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="{% url 'orderHistory' %}">ประวัติการสั่งซื้อ</a></li>
+                </ul>
+            </li>
+            <li class="nav-item fs-4 ms-5 btn btn-secondary">
+                <a class="nav-link active" aria-current="page" href="{% url 'logOut' %}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+            </li>
+            {% else %}
+            <li class="nav-item fs-4 ms-5 btn btn-secondary">
+                <a class="nav-link active" aria-current="page" href="{% url 'signUp' %}"><i class="fa-solid fa-user-plus"></i> Sign Up</a>
+            </li>
+            <li class="nav-item fs-4 ms-3 btn btn-secondary">
+                <a class="nav-link active" aria-current="page" href="{% url 'logIn' %}"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+            </li>
+            {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
